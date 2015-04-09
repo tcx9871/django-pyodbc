@@ -338,7 +338,7 @@ class SQLCompiler(compiler.SQLCompiler):
                 buf = paren_buf.pop()
                 
                 # store the expanded paren string
-                parens[key] = buf% parens
+                parens[key] = buf if buf == "%s" else buf% parens
                 #cannot use {} because IBM's DB2 uses {} as quotes
                 paren_buf[paren_depth] += '(%(' + key + ')s)'
             else:
